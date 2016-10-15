@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import ReactivoDatePicker from 'third/reactivo/ReactivoDatePicker.jsx';
+import ReactivoDatePicker from 'third/reactivo';
 
 class ActivityEdit extends React.Component {
 
