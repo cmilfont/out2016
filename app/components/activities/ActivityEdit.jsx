@@ -1,25 +1,35 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
+import ReactivoDatePicker from 'third/reactivo/ReactivoDatePicker.jsx';
 
 class ActivityEdit extends React.Component {
 
   state = {
-    description: ''
+    description: '',
+    date: null,
   }
 
   componentDidMount() {
-    const { description } = this.props;
-    this.setState({ description });
+    const { description, date } = this.props;
+    this.setState({ description, date });
   }
 
   onChange = ({ target : { value : description }}) => {
-    this.setState({ description });
+    this.setState({
+      ...this.state,
+      description,
+    });
   }
 
   render () {
-    const { state: { description }, onChange } = this;
+    const { state: { description, date }, onChange } = this;
     return (
       <div>
-        <input onChange={onChange} type="text" value={description} />
+        <div>
+          <ReactivoDatePicker value={date} />
+        </div>
+        <div>
+          <input onChange={onChange} type="text" value={description} />
+        </div>
       </div>
     );
   }

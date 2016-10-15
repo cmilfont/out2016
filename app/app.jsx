@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Activities from './components/activities/Activities.jsx';
+import Activities from 'components/activities/Activities.jsx';
 
 const activities = [
   {

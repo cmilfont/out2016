@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
-import Activity from './Activity.jsx';
-import ActivityEdit from './ActivityEdit.jsx';
-import fetch from 'whatwg-fetch';
+import Activity from 'components/activities/Activity.jsx';
+import ActivityEdit from 'components/activities/ActivityEdit.jsx';
 
 class Activities extends React.Component {
 
