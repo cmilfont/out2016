@@ -1,14 +1,13 @@
 import React, { PropTypes } from 'react'
 
-class Activity extends React.Component {
-  render () {
-    const onEdit = this.props.onEdit;
-    const id = this.props.id;
-    const description = this.props.description;
-    return (
-      <div data-id={id} onClick={onEdit}>{description}</div>
-    );
-  }
-}
+const Activity = ({ id, description, onEdit }) => (
+  <div data-id={id} onClick={onEdit}>{description}</div>
+);
+
+Activity.propTypes = {
+  id: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+};
 
 export default Activity;

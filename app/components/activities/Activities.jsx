@@ -1,65 +1,56 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Activity from './Activity.jsx';
 import ActivityEdit from './ActivityEdit.jsx';
+import fetch from 'whatwg-fetch';
 
 class Activities extends React.Component {
 
   static propTypes = {
-    activities: React.PropTypes.array.isRequired,
+    activities: PropTypes.array.isRequired,
   }
 
   state = {
     editable_id: null,
-    activities: [
-    {
-      id: 30,
-      date: new Date,
-      type: {
-        description: 'MEETING'
-      },
-      description: 'Reunião as 13'
-    },
-    {
-      id: 36,
-      date: new Date,
-      type: {
-        description: 'WORKOUT'
-      },
-      description: '#fikgrandeporra #saimonstro #birl'
-    },
-  ]}
+    activities: [],
+  }
 
-  onEdit = event => {
-    const id = event.target.dataset.id;
+  componentDidMount() {
+    fetch('/activities.json')
+      .then(response => response.json())
+      .then(activities => this.setState({
+        ...this.state,
+        activities,
+      }))
+  }
+
+  onEdit = ({ target: { dataset: { id: editable_id } }}) => {
     this.setState({
-      activities: this.state.activities,
-      editable_id: `activity-${id}`,
+      ...this.state,
+      editable_id,
     });
   }
 
   mapActivity = item => {
-
-    const container = (this.state.editable_id === `activity-${item.id}`) ?
+    const { editable_id } = this.state;
+    const id = `activity-${item.id}`;
+    const container = (editable_id === id) ?
       <ActivityEdit
-        key={`activity-${item.id}`}
-        description={item.description}
-        id={item.id}
+        key={id}
+        {...item}
+        id={id}
       /> :
       <Activity
-        key={`activity-${item.id}`}
+        key={id}
         onEdit={this.onEdit}
-        description={item.description}
-        id={item.id}
+        {...item}
+        id={id}
       />;
-
     return container;
-
   }
 
   render() {
-
-    const list = this.state.activities.map(this.mapActivity, this);
-
+    const { activities } = this.state;
+    const list = activities.map(this.mapActivity, this);
     return (
       <div>
         {list}

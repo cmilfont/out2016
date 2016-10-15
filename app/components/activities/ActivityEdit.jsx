@@ -7,20 +7,19 @@ class ActivityEdit extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      description: this.props.description,
-    });
+    const { description } = this.props;
+    this.setState({ description });
   }
 
-  onChange = ({target : { value : description }}) => {
+  onChange = ({ target : { value : description }}) => {
     this.setState({ description });
   }
 
   render () {
-    const description = this.state.description;
+    const { state: { description }, onChange } = this;
     return (
       <div>
-        <input onChange={this.onChange} type="text" value={description} />
+        <input onChange={onChange} type="text" value={description} />
       </div>
     );
   }
